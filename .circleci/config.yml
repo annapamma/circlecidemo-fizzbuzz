@@ -1,41 +1,19 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.1.0
+
 jobs:
-  test:
-    docker:
-      - image: circleci/node:10.16.3
+  build:
+    executor: node/default
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - node-deps-v1-{{ .Branch }}-{{ checksum "./yarn.lock" }}
-      - run:
-          name: Yarn install
-          command: yarn install
-      - save_cache:
-            key: node-deps-v1-{{ .Branch }}-{{ checksum "./yarn.lock" }}
-            paths:
-              - ./node_modules
-      - run:
-          name: Run tests
-          command: yarn run test
-  publish:
-    docker:
-      - image: circleci/node:10.16.3
-    steps:
-      - checkout
-      - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-      - run:
-          name: NPM publish
-          command: npm publish
+      - node/install-packages:
+          pkg-manager: yarn
+      - node/test
 
 workflows:
   test:
     jobs:
-      - test
-      - publish:
-#          context: npm-demo
-          requires:
-            - test
+      - build:
+          context: npm-demo
