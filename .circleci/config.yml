@@ -10,3 +10,8 @@ jobs:
       - run: yarn test
       - run: npm publish
 
+workflows:
+  test:
+    jobs:
+      - build:
+          context: npm-demo
