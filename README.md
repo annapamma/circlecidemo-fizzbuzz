@@ -18,5 +18,14 @@ Usage
 ```js
 const fizzbuzz = require('circledemo-fizzbuzz')
 
-fizzbuzz(21)
+fizzbuzz(6)
+```
+
+Output:
+```
+1
+2
+Fizz
+4
+Buzz
 ```
