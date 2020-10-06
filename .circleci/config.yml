@@ -12,6 +12,7 @@ jobs:
           pkg-manager: yarn
   deploy:
     executor: node/default
+    resource_class: small
     steps:
       - checkout
       - run:
