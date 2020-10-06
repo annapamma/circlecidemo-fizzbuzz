@@ -34,3 +34,5 @@ workflows:
                 - 10.19.0
       - deploy:
           context: npm-demo
+          requires:
+            - node/test
