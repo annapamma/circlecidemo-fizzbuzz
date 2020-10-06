@@ -12,6 +12,7 @@ jobs:
           pkg-manager: yarn
 
 workflows:
-  test:
+  test-then-deploy:
     jobs:
-      - node/test
+      - node/test:
+          pkg-manager: yarn
