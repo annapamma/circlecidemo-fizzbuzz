@@ -5,7 +5,7 @@ An NPM package for demonstrating basic CircleCI concepts, including:
 - workflows
 - jobs
 
-The CircleCI config includes jobs for a simple test, build, deploy cycle.
+The CircleCI config includes jobs for a simple test and deploy/publish cycle.
 
 ## Usage
 
