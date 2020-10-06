@@ -1,22 +1,38 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@4.1.0
-
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:10.16.3
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: yarn
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{ checksum "./yarn.lock" }}
       - run:
+          name: Yarn install
+          command: yarn install
+      - save_cache:
+            key: node-deps-v1-{{ .Branch }}-{{ checksum "./yarn.lock" }}
+            paths:
+              - ./node_modules
+      - run:
+          name: Run tests
           command: yarn run test
-          name: Run YARN tests
+  publish:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          name: NPM publish
+          command: npm publish
 
 workflows:
   test:
     jobs:
-      - build:
+      - test
+      - publish:
           context: npm-demo
+          requires:
+            - test
