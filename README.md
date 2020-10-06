@@ -6,3 +6,17 @@ An NPM package for demonstrating basic CircleCI concepts, including:
 - jobs
 
 The CircleCI config includes jobs for a simple test, build, deploy cycle.
+
+## Usage
+
+Installation
+```sh
+yarn add circlecidemo-fizzbuzz
+```
+
+Usage
+```js
+const fizzbuzz = require('circledemo-fizzbuzz')
+
+fizzbuzz(21)
+```
