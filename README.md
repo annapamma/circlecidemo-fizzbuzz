@@ -1,9 +1,9 @@
 # circlecidemo-fizzbuzz
 
 An NPM package for demonstrating basic CircleCI concepts, including:
-- pipelines
-- workflows
-- jobs
+- [pipelines](https://circleci.com/docs/2.0/pipelines/)
+- [workflows](https://circleci.com/docs/2.0/jobs-steps/)
+- [jobs](https://circleci.com/docs/2.0/pipelines/#jobs-tests-artifacts)
 
 The CircleCI config includes jobs for a simple test and deploy/publish cycle.
 
