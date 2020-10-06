@@ -25,6 +25,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - run:
           name: NPM publish
           command: npm publish
 
