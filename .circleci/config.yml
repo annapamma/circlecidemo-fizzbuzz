@@ -1,0 +1,33 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/node:10.16:3
+    steps:
+      - checkout
+      - run:
+          name: Yarn install
+          command: yarn install
+      - run:
+          name: Run tests
+          command: yarn run test
+  publish:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - run:
+          name: NPM publish
+          command: npm publish
+
+workflows:
+  test-then-publish:
+    jobs:
+      - test
+      - publish:
+          requires:
+            - test
