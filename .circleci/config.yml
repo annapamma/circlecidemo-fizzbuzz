@@ -1,17 +1,9 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.1.0
+
 jobs:
-  test:
-    docker:
-      - image: circleci/node:10.16.3
-    steps:
-      - checkout
-      - run:
-          name: Yarn install
-          command: yarn install
-      - run:
-          name: Run tests
-          command: yarn run test
   publish:
     docker:
       - image: circleci/node:10.16.3
@@ -27,7 +19,8 @@ jobs:
 workflows:
   test-then-publish:
     jobs:
-      - test
+      - node/test:
+          pkg-manager: yarn
       - publish:
           context: npm-demo
           requires:
