@@ -24,4 +24,4 @@ workflows:
       - publish:
           context: npm-demo
           requires:
-            - test
+            - node/test
